@@ -1,18 +1,19 @@
 #!/bin/bash
 
-# Stop existing container
+# Stop and remove old container
 docker stop flask-app || true
-
-# Remove existing container
 docker rm flask-app || true
 
-# Kill anything using port 5000
-fuser -k 5000/tcp || true
+# Kill any process using port 5000
+sudo kill -9 $(sudo lsof -t -i:5000) || true
+
+# Remove unused containers
+docker container prune -f || true
 
 # Pull latest image
 docker pull abhishekgowdrum/simple-python-flask-app:latest
 
-# Run container
+# Run new container
 docker run -d \
   --name flask-app \
   -p 5000:5000 \
