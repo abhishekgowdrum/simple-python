@@ -1,8 +1,13 @@
 #!/bin/bash
-set -e
 
-# Pull the Docker image from Docker Hub
+# Stop all running containers
+docker stop $(docker ps -q) || true
+
+# Remove all containers
+docker rm $(docker ps -aq) || true
+
+# Pull latest image
 docker pull abhishekgowdrum/simple-python-flask-app
 
-# Run the Docker image as a container
+# Run container
 docker run -d -p 5000:5000 abhishekgowdrum/simple-python-flask-app
