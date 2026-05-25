@@ -22,5 +22,5 @@ docker pull abhishekgowdrum/simple-python-flask-app:latest
 # Run container
 docker run -d \
   --name flask-app \
-  -p 5000:5000 \
+  -p 8000:5000 \
   abhishekgowdrum/simple-python-flask-app:latest
